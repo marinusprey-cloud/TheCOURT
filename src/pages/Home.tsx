@@ -21,7 +21,9 @@ export function Home() {
   const seasonMatches = activeSeason ? matches.filter((m) => m.seasonId === activeSeason.id) : []
   const chemistry = computePartnerChemistry(matches).filter((c) => c.played >= 2)
   const bestPair = chemistry[0]
-  const hottest = [...activeLeaderboard].sort((a, b) => b.stats.currentStreak.length - a.stats.currentStreak.length)[0]
+  const hottest = [...activeLeaderboard]
+    .filter((r) => r.stats.currentStreak.type === 'win')
+    .sort((a, b) => b.stats.currentStreak.length - a.stats.currentStreak.length)[0]
 
   return (
     <div>
@@ -163,10 +165,7 @@ export function Home() {
                 <TrendUp size={14} /> Heißeste Serie
               </p>
               <p className="font-display text-3xl font-light text-paper">{hottest.player.name}</p>
-              <p className="mt-3 tabular text-court">
-                {hottest.stats.currentStreak.length}×{' '}
-                {hottest.stats.currentStreak.type === 'win' ? 'in Folge gewonnen' : 'in Folge verloren'}
-              </p>
+              <p className="mt-3 tabular text-court">{hottest.stats.currentStreak.length}× in Folge gewonnen</p>
               <Link to={`/spieler/${hottest.player.id}`} className="mt-6 inline-block text-xs uppercase tracking-wide text-paper-dim hover:text-clay">
                 Profil ansehen →
               </Link>

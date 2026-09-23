@@ -38,7 +38,7 @@ export function Nav() {
       />
       <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-8">
         <NavLink to="/" className="font-display text-lg font-medium tracking-tight text-paper" {...plusHint}>
-          PADEL<span className="text-clay">/</span>LIGA
+          THE<span className="text-clay">COURT</span>
         </NavLink>
 
         <nav className="hidden items-center gap-5 xl:flex">

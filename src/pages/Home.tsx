@@ -39,7 +39,7 @@ export function Home() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="font-sans text-xs font-medium uppercase tracking-[0.25em] text-paper-dim"
           >
-            Padel Liga {activeSeason && <>· {activeSeason.name}</>}
+            TheCourt {activeSeason && <>· {activeSeason.name}</>}
           </motion.p>
 
           {leader && (

@@ -1,0 +1,113 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Bricolage Grotesque", "Inter Tight", system-ui, sans-serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-mono: "Inter Tight", system-ui, sans-serif;
+
+  --color-ink: #0a0a0a;
+  --color-surface: #121212;
+  --color-surface-2: #161615;
+  --color-surface-3: #1e1e1c;
+  --color-hairline: rgba(245, 243, 239, 0.1);
+  --color-hairline-strong: rgba(245, 243, 239, 0.18);
+  --color-paper: #f5f3ef;
+  --color-paper-dim: #8f8d86;
+  --color-paper-faint: #5c5b56;
+
+  --color-clay: #e2622c;
+  --color-clay-dim: #a8471f;
+  --color-court: #4f9d74;
+  --color-court-dim: #336b4d;
+  --color-loss: #c14545;
+
+  --animate-marquee: marquee 32s linear infinite;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color-scheme: dark;
+  }
+}
+
+html {
+  background: var(--color-ink);
+  color-scheme: dark;
+}
+
+body {
+  background: var(--color-ink);
+  color: var(--color-paper);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  min-height: 100dvh;
+}
+
+::selection {
+  background: var(--color-clay);
+  color: var(--color-ink);
+}
+
+* {
+  scrollbar-color: var(--color-hairline-strong) transparent;
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Film grain overlay: fixed, pointer-events none, sits above everything */
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  pointer-events: none;
+  opacity: 0.045;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+}
+
+/* Custom cursor */
+.no-native-cursor,
+.no-native-cursor * {
+  cursor: none !important;
+}
+
+@media (hover: none), (pointer: coarse) {
+  .no-native-cursor,
+  .no-native-cursor * {
+    cursor: auto !important;
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Focus visibility kept intentional even with custom cursor */
+:focus-visible {
+  outline: 2px solid var(--color-clay);
+  outline-offset: 3px;
+}
